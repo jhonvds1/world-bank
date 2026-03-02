@@ -38,4 +38,6 @@ def run_extract():
         "SL.UEM.TOTL.ZS", #  Percentual da população economicamente ativa que está desempregada.
         "NY.GDP.MKTP.KD.ZG" # Taxa de crescimento do PIB (já ajustada pela inflação, crescimento real).
     ]
-    extract_worldbank_data(countries, indicators)
+    data = extract_worldbank_data(countries, indicators)
+
+    return data
