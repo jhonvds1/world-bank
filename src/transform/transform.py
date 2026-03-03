@@ -19,3 +19,5 @@ def run_transform():
     df = change_year_type(df)
     df = drop_null(df)
     return df
+
+run_transform()
