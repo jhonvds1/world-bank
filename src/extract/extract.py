@@ -1,5 +1,13 @@
 import requests
+import logging
 
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+
+extract_logger = logging.getLogger("extract")
 
 def extract_worldbank_data(countries, indicators):
     data = []
@@ -13,6 +21,7 @@ def extract_worldbank_data(countries, indicators):
                 json_data = response.json()
             
                 if len(json_data) > 1 and json_data is not None:
+                    extract_logger.info(f"Extraindo {len(json_data[1])} dados provenientes de: {url}")
                     for record in json_data[1]:
                         data.append({
                             "country": record["country"]["value"],
@@ -23,12 +32,15 @@ def extract_worldbank_data(countries, indicators):
                             "value": record["value"]
                         })
             except requests.exceptions.RequestException as e:
-                print(f"Erro ao buscar {country} - {indicator}: {e}")
+                extract_logger.warning(f"Erro ao buscar {country} - {indicator}: {e}")
+                raise
+            extract_logger.info(f"Dados de {url} extraídos com sucesso")
     return data
 
 
 
 def run_extract():
+    extract_logger.info("Iniciando processo de extracao de dados")
     countries = ["BRA", "USA", "CHN", "IND", "DEU"]
     indicators = [
         "NY.GDP.MKTP.CD", # PIB total do país em dólares atuais (sem ajuste de inflação).
@@ -39,5 +51,5 @@ def run_extract():
         "NY.GDP.MKTP.KD.ZG" # Taxa de crescimento do PIB (já ajustada pela inflação, crescimento real).
     ]
     data = extract_worldbank_data(countries, indicators)
-
+    extract_logger.info("Processo de extracao de dados finalizado")
     return data

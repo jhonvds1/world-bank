@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY src/ src/
 
-CMD ["python", "-m", "src.load.load"]
+CMD ["python", "-m", "src.main"]
