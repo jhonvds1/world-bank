@@ -2,6 +2,8 @@ from src.load.load import run_load  # Importa a função que executa a etapa de 
 import logging                       # Para acompanhar o que acontece durante a execução
 from src.extract.extract import run_extract
 from src.transform.transform import run_transform
+from pathlib import Path
+import papermill as pm
 
 
 # Configura o logging para exibir informações no terminal
@@ -20,6 +22,18 @@ def run_pipeline() -> None:
         data = run_extract()
         df = run_transform(data)        
         run_load(df)                                # Executa a etapa de carga de dados no banco
+
+        # caminho relativo ao main.py
+        logging.info("Executando Notebook")
+        notebook_path = Path(__file__).resolve().parent.parent / "notebooks" / "visualizacao.ipynb"
+
+        pm.execute_notebook(
+            str(notebook_path),
+            str(notebook_path)
+)
+        logging.info("Notebook executado com Sucesso")
+
+
     except Exception as e:
         # Caso haja algum erro crítico, logamos e interrompemos a execução
         main_logger.info("Falha crítica no Pipeline")

@@ -24,7 +24,7 @@ def connect_db() -> connection:
         database=os.getenv("DB_NAME"),
         user=os.getenv("DB_USER"),   
         password=os.getenv("DB_PASSWORD"),  
-        port=5432                                 
+        port=os.getenv("DB_PORT")                                 
     )
     load_logger.info("Conexão estabelecida com sucesso!")
     return conn
