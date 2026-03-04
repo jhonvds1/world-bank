@@ -95,7 +95,7 @@ Clone o repositório:
 git clone https://github.com/jhonvds1/world-bank.git 
 ```
 ```
-cd worldbank-etl
+cd world-bank
 ```
 
 Suba os containers com Docker Compose:
