@@ -92,7 +92,7 @@ As visualizações são feitas com **Matplotlib** e preparadas para integração
 Clone o repositório:
 
 ```
-git clone https://github.com/seu-usuario/worldbank-etl.git  
+git clone https://github.com/jhonvds1/world-bank.git 
 ```
 ```
 cd worldbank-etl
