@@ -16,7 +16,7 @@ load_logger = logging.getLogger("load")
 def connect_db():
     load_logger.info("Conectando-se ao banco de dados")
     conn = psycopg2.connect(
-        host = "host.docker.internal",
+        host = "db",
         port = 5432,
         dbname = "world_bank",
         user = "postgres",
