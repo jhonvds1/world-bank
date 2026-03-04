@@ -1,7 +1,7 @@
 from src.load.load import run_load  # Importa a função que executa a etapa de load do ETL
 import logging                       # Para acompanhar o que acontece durante a execução
 from src.extract.extract import run_extract
-
+from src.transform.transform import run_transform
 
 
 # Configura o logging para exibir informações no terminal
@@ -14,12 +14,12 @@ main_logger = logging.getLogger("main")  # Logger específico para a execução 
 def run_pipeline():
     """
     Função principal que executa o pipeline completo.
-    Aqui estamos focando na etapa de load, mas poderia ser expandido para incluir
-    extração e transformação, criando um fluxo completo de ETL.
     """
     try:
         main_logger.info("Iniciando o Pipeline")  # Log de início do pipeline
-        run_load()                                # Executa a etapa de carga de dados no banco
+        data = run_extract()
+        df = run_transform(data)        
+        run_load(df)                                # Executa a etapa de carga de dados no banco
     except Exception as e:
         # Caso haja algum erro crítico, logamos e interrompemos a execução
         main_logger.info("Falha crítica no Pipeline")

@@ -104,7 +104,7 @@ def insert_values(cursor, df):
     load_logger.info(f"{cursor.rowcount} linhas adicionadas em fact_indicators")
     load_logger.info("Carga finalizada com sucesso")
 
-def run_load():
+def run_load(df):
     """
     Função principal que executa todo o processo de carga (load):
     1. Pega os dados transformados da função run_transform
@@ -115,7 +115,6 @@ def run_load():
     Essa função garante que o ETL seja executado de forma organizada e rastreável.
     """
     load_logger.info("Iniciando processo de load...")
-    df = run_transform()        # Obtemos os dados já transformados e prontos para carga
     conn = connect_db()         # Conectamos ao banco
     cursor = conn.cursor()      
     create_tables(cursor)       # Garantimos que as tabelas existem

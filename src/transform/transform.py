@@ -44,19 +44,15 @@ def change_year_type(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 # Função principal do módulo de transformação
-def run_transform():
+def run_transform(data):
     """
     Função central que:
-    1. Chama a extração
-    2. Transforma os dados em DataFrame
-    3. Converte tipos
-    4. Remove nulos
-    5. Loga cada etapa
+    1. Transforma os dados em DataFrame
+    2. Converte tipos
+    3. Remove nulos
+    4. Loga cada etapa
     """
     transform_logger.info("Iniciando processo de transformação")
-    
-    # Extração de dados brutos
-    data = run_extract()
     
     # Transformação inicial em DataFrame
     df = transform_df(data)
