@@ -8,7 +8,7 @@ logging.basicConfig(
 )
 extract_logger = logging.getLogger("extract")  # Logger específico para a etapa de extração
 
-def extract_worldbank_data(countries, indicators):
+def extract_worldbank_data(countries:list, indicators:list)->list:
     """
     Função que consulta a API do World Bank e retorna os dados de indicadores econômicos
     para uma lista de países e indicadores fornecidos.
@@ -45,7 +45,7 @@ def extract_worldbank_data(countries, indicators):
             extract_logger.info(f"Dados de {url} extraídos com sucesso")  # Log de sucesso por URL
     return data  # Retorna todos os dados coletados
 
-def run_extract():
+def run_extract()->list:
     """
     Função principal que executa o processo de extração:
     1. Define países e indicadores que queremos extrair

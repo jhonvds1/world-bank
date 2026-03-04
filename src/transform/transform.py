@@ -1,5 +1,4 @@
 # Importação da função de extração e bibliotecas essenciais
-from src.extract.extract import run_extract  # Função que traz os dados brutos (JSON, API, etc.)
 import pandas as pd                          # Biblioteca padrão para manipulação de dados tabulares
 import logging                               # Biblioteca padrão para logs e monitoramento do pipeline
 
@@ -44,7 +43,7 @@ def change_year_type(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 # Função principal do módulo de transformação
-def run_transform(data):
+def run_transform(data:list)->pd.DataFrame:
     """
     Função central que:
     1. Transforma os dados em DataFrame

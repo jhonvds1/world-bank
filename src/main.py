@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 main_logger = logging.getLogger("main")  # Logger específico para a execução do pipeline
 
-def run_pipeline():
+def run_pipeline() -> None:
     """
     Função principal que executa o pipeline completo.
     """

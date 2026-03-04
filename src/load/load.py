@@ -1,8 +1,9 @@
-from src.transform.transform import run_transform  # Função que transforma os dados, preparando-os para serem carregados
 import psycopg2                                     # Conector para PostgreSQL
 from psycopg2.extras import execute_values         # Permite inserir várias linhas de forma eficiente
 import logging                                     # Para acompanhar o que acontece durante a execução
 import os                                          # Para ler variáveis de ambiente, deixando o código mais flexível
+import pandas as pd
+from psycopg2.extensions import connection, cursor
 
 # Configura o logging para mostrar mensagens de informação no terminal
 logging.basicConfig(
@@ -11,7 +12,7 @@ logging.basicConfig(
 )
 load_logger = logging.getLogger("load")  # Logger específico para acompanhar a etapa de carga (load)
 
-def connect_db():
+def connect_db() -> connection:
     """
     Conecta ao banco de dados PostgreSQL usando variáveis de ambiente.
     Se não estiverem definidas, usa valores padrão (útil para desenvolvimento local e Docker).
@@ -28,7 +29,7 @@ def connect_db():
     load_logger.info("Conexão estabelecida com sucesso!")
     return conn
 
-def create_tables(cursor):
+def create_tables(cursor: cursor) -> None:
     """
     Cria as tabelas necessárias para o projeto caso ainda não existam:
     - dim_country: tabela dimensão de países
@@ -59,7 +60,7 @@ def create_tables(cursor):
     cursor.execute(query)
     load_logger.info("Tabelas criadas com sucesso")
 
-def insert_values(cursor, df):
+def insert_values(cursor:cursor, df:pd.DataFrame) -> None:
     """
     Insere os dados transformados no banco de dados.
     Usa execute_values para carregar várias linhas de uma vez, melhorando performance.
@@ -104,7 +105,7 @@ def insert_values(cursor, df):
     load_logger.info(f"{cursor.rowcount} linhas adicionadas em fact_indicators")
     load_logger.info("Carga finalizada com sucesso")
 
-def run_load(df):
+def run_load(df: pd.DataFrame) -> None:
     """
     Função principal que executa todo o processo de carga (load):
     1. Pega os dados transformados da função run_transform
