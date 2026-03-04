@@ -4,6 +4,7 @@ import os
 from psycopg2.extras import execute_values
 import pandas as pd
 import logging
+import os
 
 
 logging.basicConfig(
@@ -16,11 +17,11 @@ load_logger = logging.getLogger("load")
 def connect_db():
     load_logger.info("Conectando-se ao banco de dados")
     conn = psycopg2.connect(
-        host = "db",
-        port = 5432,
-        dbname = "world_bank",
-        user = "postgres",
-        password = "postgres",
+        host=os.getenv("DB_HOST", "db"),
+        database=os.getenv("DB_NAME", "world_bank"),
+        user=os.getenv("DB_USER", "postgres"),
+        password=os.getenv("DB_PASSWORD", "postgres"),
+        port=5432
     )
     load_logger.info("Conexao realizada com sucesso!")
     return conn
