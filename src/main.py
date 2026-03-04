@@ -1,5 +1,8 @@
 from src.load.load import run_load  # Importa a função que executa a etapa de load do ETL
 import logging                       # Para acompanhar o que acontece durante a execução
+from src.extract.extract import run_extract
+
+
 
 # Configura o logging para exibir informações no terminal
 logging.basicConfig(
@@ -8,7 +11,7 @@ logging.basicConfig(
 )
 main_logger = logging.getLogger("main")  # Logger específico para a execução do pipeline
 
-def main():
+def run_pipeline():
     """
     Função principal que executa o pipeline completo.
     Aqui estamos focando na etapa de load, mas poderia ser expandido para incluir
@@ -24,5 +27,5 @@ def main():
 
 # Quando este script é executado diretamente, chamamos a função main
 if __name__ == "__main__":
-    main()
+    run_pipeline()
     main_logger.info("Pipeline finalizado com sucesso")  # Log de término do pipeline

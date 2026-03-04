@@ -19,10 +19,10 @@ def connect_db():
     """
     load_logger.info("Conectando no banco de dados...")
     conn = psycopg2.connect(
-        host=os.getenv("DB_HOST", "db"),          
-        database=os.getenv("DB_NAME", "world_bank"),
-        user=os.getenv("DB_USER", "postgres"),   
-        password=os.getenv("DB_PASSWORD", "postgres"),  
+        host=os.getenv("DB_HOST"),          
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),   
+        password=os.getenv("DB_PASSWORD"),  
         port=5432                                 
     )
     load_logger.info("Conexão estabelecida com sucesso!")
